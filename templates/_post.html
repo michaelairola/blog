@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>{% block title %}Lorem Ipsum{% endblock %}</title>
-    <link rel="stylesheet" href="static/index.css">
-</head>
-<body>
-    <header class="header">
-    <a class="logo" href="/">home</a>
-    <nav>
-        <a href="https://www.github.com/niklasfasching">github</a>
-        <a href="/about">about</a>
-    </nav>
-    </header>
-    <div>
-        <h1 class="title">{{ self.title() }}</h1>
-        <ul class="tags">
-            <li>Created {{ file_creation_time }}</li>
-            <li>Last Updated {{ file_last_updated_time }}</li>
+{% extends "_base.html" %}
+{% block page %}
+    <h1 class="title">{{ self.title() }}</h1>
+    {% if file_creation_time and file_last_updated_time %}
+        <ul class="subtitle">
+            <li><icon class="fas fa-calendar-alt"></icon>Created {{ file_creation_time.strftime("%B, %d %Y") }}</li>
+            <li><icon class="fas fa-calendar-alt"></icon>Last updated {{ file_last_updated_time.strftime("%B, %d %Y") }}</li>
         </ul>
-        {% block post %}
-            {% for i in range(10) %}
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            {% endfor %}
-        {% endblock %}
-    </div>
-</body>
-</html>
+    {% endif %}
+    {% block post %}
+        {% for i in range(10) %}
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        {% endfor %}
+    {% endblock %}
+{% endblock %}

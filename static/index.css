@@ -122,6 +122,10 @@ table, .highlight > pre, pre.example {
     color: #666;
 }
 
+.subtitle li {
+    list-style: none;
+}
+
 .tags {
     margin-top: -1.5rem;
     padding-bottom: 1.5em;

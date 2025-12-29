@@ -1,0 +1,18 @@
+{% extends "_post.html" %}
+
+{% block title %}Welcome to Mike's Blog!{% endblock %}
+
+{% block page %}        
+    <h1 class="title"> Welcome to Mike's Blog! </h1>
+    <p>
+        This is mike's blog - As minimalistic it gets.
+    </p>
+    <p>
+        Code is <a href="#TBD">here</a>.</p>
+    <p>
+        Built with love, using <a href="https://pypi.org/project/jinja2static/">Jinja2Static</a>
+    </p>
+    {% for _ in range(20) %}
+        <i class="fa-solid fa-fire"></i>
+    {% endfor %}
+{% endblock %}
