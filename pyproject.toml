@@ -1,4 +1,4 @@
 [tools.jinja2static]
 templates="templates"
-static="static"
+assets="assets"
 dist="dist"

@@ -1,1 +1,16 @@
 {% extends "_base.html" %}
+
+{% block title %}Blog{% endblock %}
+{% block page %}
+    <h1 class="title">{{ self.title() }}</h1>
+    <ul class="posts">
+        {% for page, v in pages.items() %}
+            {% if page.relative_to(config.templates).parts[0] == "posts" %}
+                <li class="post"><a href="{{ page.relative_to(config.templates) }}">
+                    <date>{{ v["file_last_updated_time"].strftime("%d.%m.%Y") }}</date>
+                    {{ page.stem }}
+                </a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
