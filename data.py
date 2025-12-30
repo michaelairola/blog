@@ -3,6 +3,8 @@ import subprocess
 import logging
 from datetime import datetime
 from pathlib import Path
+import contextlib
+
 
 from jinja2static import Config
 from jinja2static import inject_data_function
@@ -25,13 +27,14 @@ def get_git_logs(file_path, filter_flag: str) -> datetime:
     Retrieves the first and last commit date for a given file from git history.
     These can be thought of as the creation and last updated dates for the file.
     """
-    GIT_TOP_LEVEL = get_git_toplevel_for(file_path)
-    GIT_FILE_PATH = str(file_path.relative_to(GIT_TOP_LEVEL))
-    logger.debug(f"Getting git commits for '{GIT_FILE_PATH}'")
+    logger.debug(f"Getting git commits for '{file_path}'")
     cmd = [
-        "git", "--no-pager", "log", 
+        "git", 
+        "-C", str(file_path.parent),
+        "--no-pager", "log", 
         filter_flag,
-        "--pretty=format:%cI", "--follow", "--", GIT_FILE_PATH
+        "--pretty=format:%cI", "--follow", 
+        "--", str(file_path.name)
     ]
     process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     stdout, stderr = process.communicate()
