@@ -54,21 +54,22 @@ def get_creation_datetime(file_path):
 def get_last_updated_datetime(file_path):
     return get_git_logs(file_path, "-1")
 
-@inject_data_function
-def get_file_datetimes(config: Config, filepath: Path):
+def page_data(config, file_path):
+    file_path = config.templates / file_path
     return {
-        "file_creation_time": get_creation_datetime(filepath),
-        "file_last_updated_time": get_last_updated_datetime(filepath)
+        "file_creation_time": get_creation_datetime(file_path),
+        "file_last_updated_time": get_last_updated_datetime(file_path)
     }
 
+@inject_data_function
+def get_file_datetimes(config: Config, file_path: Path):
+    return page_data(config, file_path)
+
 
 @inject_data_function
-def get_pages(config: Config, filepath: Path):
+def get_pages(config: Config, file_path: Path):
     return {
         "pages": {
-            page: {
-                "file_creation_time": get_creation_datetime(filepath),
-                "file_last_updated_time": get_last_updated_datetime(filepath)
-            } for page in config.pages 
+            page: page_data(config, file_path) for page in config.pages 
         }
     }

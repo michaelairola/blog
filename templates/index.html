@@ -5,8 +5,8 @@
     <h1 class="title">{{ self.title() }}</h1>
     <ul class="posts">
         {% for page, v in pages.items() %}
-            {% if page.relative_to(config.templates).parts[0] == "posts" %}
-                <li class="post"><a href="{{ page.relative_to(config.templates) }}">
+            {% if page.parts[0] == "posts" %}
+                <li class="post"><a href="{{ page }}">
                     <date>{{ v["file_last_updated_time"].strftime("%d.%m.%Y") }}</date>
                     {{ page.stem }}
                 </a></li>
