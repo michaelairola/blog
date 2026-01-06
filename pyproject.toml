@@ -2,3 +2,4 @@
 templates="templates"
 assets="assets"
 dist="dist"
+data="data"

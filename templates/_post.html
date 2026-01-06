@@ -1,10 +1,10 @@
 {% extends "_base.html" %}
 {% block page %}
     <h1 class="title">{{ self.title() }}</h1>
-    {% if file_creation_time and file_last_updated_time %}
+    {% if page.file_creation_time and page.file_last_updated_time %}
         <ul class="subtitle">
-            <li><icon class="fas fa-calendar-alt"></icon>Created {{ file_creation_time.strftime("%B, %d %Y") }}</li>
-            <li><icon class="fas fa-calendar-alt"></icon>Last updated {{ file_last_updated_time.strftime("%B, %d %Y") }}</li>
+            <li><icon class="fas fa-calendar-alt"></icon>Created {{ page.file_creation_time.strftime("%B, %d %Y") }}</li>
+            <li><icon class="fas fa-calendar-alt"></icon>Last updated {{ page.file_last_updated_time.strftime("%B, %d %Y") }}</li>
         </ul>
     {% endif %}
     {% block post %}
